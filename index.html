@@ -1,503 +1,550 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sarah & Michael - Our Eternal Love Story</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <!-- Magical Particles Background -->
-    <div class="particles-container" id="particles"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emma & James - Our Love Story</title>
+    <meta name="description" content="Celebrating the beautiful love story of Emma and James">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="nav-logo">
-          <span class="logo-heart">♡</span>
-          <span class="logo-text">S & M</span>
+    <nav id="navigation" class="navigation">
+        <div class="nav-progress"></div>
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">Emma & James</div>
+                
+                <!-- Desktop Navigation -->
+                <div class="nav-menu">
+                    <button class="nav-item" data-href="#hero">Home</button>
+                    <button class="nav-item" data-href="#story">Our Story</button>
+                    <button class="nav-item" data-href="#timeline">Timeline</button>
+                    <button class="nav-item" data-href="#statistics">Statistics</button>
+                    <button class="nav-item" data-href="#gallery">Gallery</button>
+                    <button class="nav-item" data-href="#testimonials">Testimonials</button>
+                    <button class="nav-item" data-href="#guestbook">Guestbook</button>
+                </div>
+
+                <!-- Mobile Navigation Button -->
+                <button id="mobile-menu-btn" class="mobile-menu-btn">
+                    <span class="menu-icon">☰</span>
+                    <span class="close-icon" style="display: none;">✕</span>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-menu">
+                <button class="nav-item" data-href="#hero">Home</button>
+                <button class="nav-item" data-href="#story">Our Story</button>
+                <button class="nav-item" data-href="#timeline">Timeline</button>
+                <button class="nav-item" data-href="#statistics">Statistics</button>
+                <button class="nav-item" data-href="#gallery">Gallery</button>
+                <button class="nav-item" data-href="#testimonials">Testimonials</button>
+                <button class="nav-item" data-href="#guestbook">Guestbook</button>
+            </div>
         </div>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#story" class="nav-link">Our Story</a></li>
-          <li><a href="#timeline" class="nav-link">Journey</a></li>
-          <li><a href="#gallery" class="nav-link">Memories</a></li>
-          <li><a href="#guestbook" class="nav-link">Wishes</a></li>
-        </ul>
-        <div class="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-background">
-        <div class="hero-gradient"></div>
-        <div class="floating-elements">
-          <div class="floating-heart heart-1">♡</div>
-          <div class="floating-heart heart-2">♡</div>
-          <div class="floating-heart heart-3">♡</div>
-          <div class="floating-heart heart-4">♡</div>
-          <div class="floating-heart heart-5">♡</div>
-        </div>
-      </div>
-      
-      <div class="hero-content">
-        <div class="hero-image-container">
-          <div class="hero-image">
-            <img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sarah and Michael" />
-            <div class="hero-overlay"></div>
-            <div class="image-glow"></div>
-          </div>
-          <div class="love-rings">
-            <div class="ring ring-1"></div>
-            <div class="ring ring-2"></div>
-            <div class="ring ring-3"></div>
-          </div>
-        </div>
+    <section id="hero" class="hero-section">
+        <!-- Floating Hearts -->
+        <div class="floating-hearts"></div>
         
-        <div class="hero-text">
-          <div class="hero-badge">Est. 2020</div>
-          <h1 class="hero-title">
-            <span class="title-line">Sarah</span>
-            <span class="title-ampersand">&</span>
-            <span class="title-line">Michael</span>
-          </h1>
-          <p class="hero-subtitle">Where Two Hearts Became One Soul</p>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <div class="stat-number" data-target="1825">0</div>
-              <div class="stat-label">Days Together</div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-image-container">
+                    <div class="hero-image-glow"></div>
+                    <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?q=80&w=800&h=600&fit=crop" 
+                         alt="Emma and James together" class="hero-image">
+                    <div class="floating-heart floating-heart-1">❤</div>
+                    <div class="floating-heart floating-heart-2">❤</div>
+                </div>
+
+                <h1 class="hero-title">Emma & James</h1>
+                
+                <div class="hero-quote">
+                    <p id="rotating-quote">Every love story is beautiful, but ours is my favorite</p>
+                </div>
+                
+                <div class="hero-divider">
+                    <div class="divider-line"></div>
+                    <span class="divider-heart">❤</span>
+                    <div class="divider-line"></div>
+                </div>
+
+                <div class="hero-date-info">
+                    <div class="date-content">
+                        <div class="date-header">
+                            <span class="calendar-icon">📅</span>
+                            <span class="date-label">Together Since</span>
+                        </div>
+                        <div class="date-value">March 15, 2020</div>
+                    </div>
+                    <p class="date-description">1,747 days of love and counting...</p>
+                </div>
+
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" data-href="#story">
+                        <span class="btn-icon">❤</span>
+                        Read Our Story
+                    </button>
+                    <button class="btn btn-outline" data-href="#gallery">
+                        <span class="btn-icon">📍</span>
+                        View Gallery
+                    </button>
+                </div>
             </div>
-            <div class="stat-divider">♡</div>
-            <div class="stat-item">
-              <div class="stat-number" data-target="43800">0</div>
-              <div class="stat-label">Hours of Love</div>
-            </div>
-            <div class="stat-divider">♡</div>
-            <div class="stat-item">
-              <div class="stat-number">∞</div>
-              <div class="stat-label">Memories Made</div>
-            </div>
-          </div>
-          <button class="cta-button" onclick="document.getElementById('story').scrollIntoView({behavior: 'smooth'})">
-            <span>Discover Our Story</span>
-            <div class="button-glow"></div>
-          </button>
         </div>
-      </div>
-      
-      <div class="scroll-indicator">
-        <div class="scroll-text">Scroll to explore</div>
-        <div class="scroll-arrow"></div>
-      </div>
     </section>
 
     <!-- Our Story Section -->
     <section id="story" class="story-section">
-      <div class="section-background">
-        <div class="floating-petals">
-          <div class="petal petal-1"></div>
-          <div class="petal petal-2"></div>
-          <div class="petal petal-3"></div>
-          <div class="petal petal-4"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title floral-decoration">Our Story</h2>
+                <p class="section-description">Every love story is beautiful, but ours is our favorite</p>
+            </div>
+
+            <div class="story-content">
+                <div class="story-text">
+                    <div class="story-card story-card-pink">
+                        <h3>How We Met</h3>
+                        <p>It was a rainy Tuesday morning at the little coffee shop on Maple Street. Emma was rushing to get her usual latte before work, and James was sitting by the window, reading his favorite book. When Emma accidentally bumped into his table, spilling coffee everywhere, neither of them knew that this clumsy moment would be the beginning of their greatest adventure.</p>
+                    </div>
+
+                    <div class="story-card story-card-cream">
+                        <h3>First Date</h3>
+                        <p>Three weeks later, James worked up the courage to ask Emma out. Their first date was a picnic in Central Park, where they talked for hours about dreams, travel, and their shared love of old movies. As the sun set, they both knew this was something special – something worth fighting for.</p>
+                    </div>
+
+                    <div class="story-card story-card-gold">
+                        <h3>The Proposal</h3>
+                        <p>On their fourth anniversary, James recreated their first date in the same spot in Central Park. As Emma was reminiscing about that magical evening, James got down on one knee with a ring hidden in a picnic basket. Through happy tears, she said yes to forever.</p>
+                    </div>
+                </div>
+
+                <div class="story-images">
+                    <div class="story-images-col">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400&h=300&fit=crop" alt="Coffee shop where we met">
+                        <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=400&h=400&fit=crop" alt="Our first date location">
+                    </div>
+                    <div class="story-images-col story-images-col-offset">
+                        <img src="https://images.unsplash.com/photo-1500673922987-e212871fec22?q=80&w=400&h=400&fit=crop" alt="The proposal moment">
+                        <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?q=80&w=400&h=300&fit=crop" alt="Celebrating together">
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">Chapter One</div>
-          <h2 class="section-title">Our Love Story</h2>
-          <div class="section-divider">
-            <div class="divider-line"></div>
-            <div class="divider-heart">♡</div>
-            <div class="divider-line"></div>
-          </div>
-          <p class="section-description">Every great love story has a beginning, and ours started with a simple moment that changed everything forever.</p>
-        </div>
-        
-        <div class="story-content">
-          <div class="story-cards">
-            <div class="story-card" data-aos="fade-right">
-              <div class="card-icon">☕</div>
-              <div class="card-content">
-                <h3>The First Glance</h3>
-                <p>It was a rainy Tuesday morning at Bloom Coffee House when destiny intervened. Sarah was lost in her favorite novel while Michael sketched dreams in his notebook. A simple "Is this seat taken?" became the first words of our forever story.</p>
-                <div class="card-date">March 15, 2020</div>
-              </div>
-            </div>
-            
-            <div class="story-card" data-aos="fade-left">
-              <div class="card-icon">🌸</div>
-              <div class="card-content">
-                <h3>First Date Magic</h3>
-                <p>Three days later, we wandered through the botanical gardens, sharing dreams and laughter. Cherry blossoms danced around us like nature's confetti, celebrating the beginning of something beautiful and eternal.</p>
-                <div class="card-date">March 18, 2020</div>
-              </div>
-            </div>
-            
-            <div class="story-card" data-aos="fade-right">
-              <div class="card-icon">💕</div>
-              <div class="card-content">
-                <h3>Growing Together</h3>
-                <p>From spontaneous adventures to quiet movie nights, from celebrating victories to supporting each other through challenges, we discovered that love isn't just a feeling—it's a choice we make every single day.</p>
-                <div class="card-date">Every Day Since</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="story-visual">
-            <div class="story-image-wrapper">
-              <img src="https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Couple in love" />
-              <div class="image-frame"></div>
-            </div>
-            <div class="love-quote">
-              <blockquote>
-                "In you, I've found the love of my life and my closest, truest friend."
-              </blockquote>
-              <cite>- Our Promise to Each Other</cite>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Timeline Section -->
     <section id="timeline" class="timeline-section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">Our Journey</div>
-          <h2 class="section-title">Timeline of Love</h2>
-          <div class="section-divider">
-            <div class="divider-line"></div>
-            <div class="divider-heart">♡</div>
-            <div class="divider-line"></div>
-          </div>
-          <p class="section-description">Every milestone in our journey has been a stepping stone to forever.</p>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title floral-decoration">Timeline of Love</h2>
+                <p class="section-description">The beautiful milestones that shaped our journey together</p>
+            </div>
+
+            <div class="timeline-content">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item timeline-item-left">
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-card">
+                            <div class="timeline-date">
+                                <span class="timeline-icon">❤</span>
+                                <span class="timeline-date-text">March 15, 2020</span>
+                            </div>
+                            <h3>First Meeting</h3>
+                            <p>A chance encounter at Maple Street Coffee that changed everything.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=300&h=200&fit=crop" alt="First Meeting">
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=300&h=200&fit=crop" alt="First Date">
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-card">
+                            <div class="timeline-date">
+                                <span class="timeline-icon">❤</span>
+                                <span class="timeline-date-text">April 8, 2020</span>
+                            </div>
+                            <h3>First Date</h3>
+                            <p>Picnic in Central Park under the cherry blossoms.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-left">
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-card">
+                            <div class="timeline-date">
+                                <span class="timeline-icon">❤</span>
+                                <span class="timeline-date-text">December 25, 2020</span>
+                            </div>
+                            <h3>First Christmas</h3>
+                            <p>Our first holiday together, making gingerbread houses.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1500673922987-e212871fec22?q=80&w=300&h=200&fit=crop" alt="First Christmas">
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1721322800607-8c38375eef04?q=80&w=300&h=200&fit=crop" alt="Moving In Together">
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-card">
+                            <div class="timeline-date">
+                                <span class="timeline-icon">❤</span>
+                                <span class="timeline-date-text">July 14, 2021</span>
+                            </div>
+                            <h3>Moving In Together</h3>
+                            <p>Found our perfect little apartment in Brooklyn.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-left">
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-card">
+                            <div class="timeline-date">
+                                <span class="timeline-icon">❤</span>
+                                <span class="timeline-date-text">March 15, 2024</span>
+                            </div>
+                            <h3>The Proposal</h3>
+                            <p>James proposed on our 4th anniversary in Central Park.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?q=80&w=300&h=200&fit=crop" alt="The Proposal">
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?q=80&w=300&h=200&fit=crop" alt="Our Wedding Day">
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-card">
+                            <div class="timeline-date">
+                                <span class="timeline-icon">❤</span>
+                                <span class="timeline-date-text">September 21, 2024</span>
+                            </div>
+                            <h3>Our Wedding Day</h3>
+                            <p>The beginning of our forever adventure together.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="timeline">
-          <div class="timeline-item" data-date="March 2020">
-            <div class="timeline-marker">
-              <div class="marker-icon">☕</div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="statistics" class="statistics-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title floral-decoration">Our Love in Numbers</h2>
+                <p class="section-description">Every moment counts when you're with the one you love</p>
             </div>
-            <div class="timeline-content">
-              <h3>Serendipitous Meeting</h3>
-              <p>Our eyes met across a crowded coffee shop, and in that moment, we both knew something magical was beginning.</p>
-              <div class="timeline-image">
-                <img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Coffee shop meeting" />
-              </div>
+
+            <div class="statistics-grid">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-pink">📅</div>
+                    <div class="stat-count" data-target="1747">0</div>
+                    <p class="stat-label">Days Together</p>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-gold">❤</div>
+                    <div class="stat-count" data-target="156">0</div>
+                    <p class="stat-label">Amazing Dates</p>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-pink">📍</div>
+                    <div class="stat-count" data-target="12">0</div>
+                    <p class="stat-label">Cities Explored</p>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-gold">☕</div>
+                    <div class="stat-count" data-target="1000">0</div>
+                    <p class="stat-label">Sweet Memories</p>
+                </div>
             </div>
-          </div>
-          
-          <div class="timeline-item" data-date="June 2020">
-            <div class="timeline-marker">
-              <div class="marker-icon">💫</div>
-            </div>
-            <div class="timeline-content">
-              <h3>First "I Love You"</h3>
-              <p>Under a canopy of stars during our camping trip to Pine Lake, we whispered the words that sealed our hearts forever.</p>
-              <div class="timeline-image">
-                <img src="https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Starry night" />
-              </div>
-            </div>
-          </div>
-          
-          <div class="timeline-item" data-date="December 2020">
-            <div class="timeline-marker">
-              <div class="marker-icon">🏠</div>
-            </div>
-            <div class="timeline-content">
-              <h3>Our First Home</h3>
-              <p>We found our perfect little sanctuary with the garden view, where we built our nest of love and dreams.</p>
-              <div class="timeline-image">
-                <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cozy home" />
-              </div>
-            </div>
-          </div>
-          
-          <div class="timeline-item" data-date="August 2022">
-            <div class="timeline-marker">
-              <div class="marker-icon">💍</div>
-            </div>
-            <div class="timeline-content">
-              <h3>The Proposal</h3>
-              <p>Michael returned to our special botanical gardens, where it all began, and asked the question that made our dreams come true.</p>
-              <div class="timeline-image">
-                <img src="https://images.pexels.com/photos/1024974/pexels-photo-1024974.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Proposal moment" />
-              </div>
-            </div>
-          </div>
-          
-          <div class="timeline-item" data-date="October 2024">
-            <div class="timeline-marker">
-              <div class="marker-icon">👰</div>
-            </div>
-            <div class="timeline-content">
-              <h3>Our Wedding Day</h3>
-              <p>Surrounded by love and joy, we promised forever to each other and began our greatest adventure as husband and wife.</p>
-              <div class="timeline-image">
-                <img src="https://images.pexels.com/photos/1488317/pexels-photo-1488317.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Wedding day" />
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Gallery Section -->
     <section id="gallery" class="gallery-section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">Captured Moments</div>
-          <h2 class="section-title">Our Gallery</h2>
-          <div class="section-divider">
-            <div class="divider-line"></div>
-            <div class="divider-heart">♡</div>
-            <div class="divider-line"></div>
-          </div>
-          <p class="section-description">Every picture tells a story, and together they paint the masterpiece of our love.</p>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title floral-decoration">Our Gallery</h2>
+                <p class="section-description">Capturing the precious moments of our love story</p>
+                
+                <!-- Filter Buttons -->
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">
+                        <span class="filter-icon">🔍</span>
+                        All Photos
+                    </button>
+                    <button class="filter-btn" data-filter="dates">
+                        <span class="filter-icon">🔍</span>
+                        Date Nights
+                    </button>
+                    <button class="filter-btn" data-filter="travel">
+                        <span class="filter-icon">🔍</span>
+                        Adventures
+                    </button>
+                    <button class="filter-btn" data-filter="home">
+                        <span class="filter-icon">🔍</span>
+                        Cozy Moments
+                    </button>
+                    <button class="filter-btn" data-filter="special">
+                        <span class="filter-icon">🔍</span>
+                        Special Events
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-grid" id="gallery-grid">
+                <div class="gallery-item" data-category="travel">
+                    <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?q=80&w=400&h=300&fit=crop" alt="Emma and James at the beach">
+                    <div class="gallery-overlay">
+                        <div class="gallery-heart">❤</div>
+                    </div>
+                    <div class="gallery-category">Adventures</div>
+                </div>
+                
+                <div class="gallery-item" data-category="dates">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400&h=400&fit=crop" alt="Coffee date together">
+                    <div class="gallery-overlay">
+                        <div class="gallery-heart">❤</div>
+                    </div>
+                    <div class="gallery-category">Date Nights</div>
+                </div>
+                
+                <div class="gallery-item" data-category="travel">
+                    <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=400&h=300&fit=crop" alt="Nature walk in the park">
+                    <div class="gallery-overlay">
+                        <div class="gallery-heart">❤</div>
+                    </div>
+                    <div class="gallery-category">Adventures</div>
+                </div>
+                
+                <div class="gallery-item" data-category="special">
+                    <img src="https://images.unsplash.com/photo-1500673922987-e212871fec22?q=80&w=400&h=400&fit=crop" alt="Romantic evening lights">
+                    <div class="gallery-overlay">
+                        <div class="gallery-heart">❤</div>
+                    </div>
+                    <div class="gallery-category">Special Events</div>
+                </div>
+                
+                <div class="gallery-item" data-category="home">
+                    <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?q=80&w=400&h=300&fit=crop" alt="Cozy moments at home">
+                    <div class="gallery-overlay">
+                        <div class="gallery-heart">❤</div>
+                    </div>
+                    <div class="gallery-category">Cozy Moments</div>
+                </div>
+                
+                <div class="gallery-item" data-category="home">
+                    <img src="https://images.unsplash.com/photo-1721322800607-8c38375eef04?q=80&w=400&h=400&fit=crop" alt="Our first apartment together">
+                    <div class="gallery-overlay">
+                        <div class="gallery-heart">❤</div>
+                    </div>
+                    <div class="gallery-category">Cozy Moments</div>
+                </div>
+                
+                <div class="gallery-item" data-category="dates">
+                    <img src="https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?q=80&w=400&h=300&fit=crop" alt="Stargazing together">
+                    <div class="gallery-overlay">
+                        <div class="gallery-heart">❤</div>
+                    </div>
+                    <div class="gallery-category">Date Nights</div>
+                </div>
+            </div>
         </div>
-        
-        <div class="gallery-filters">
-          <button class="filter-btn active" data-filter="all">All Memories</button>
-          <button class="filter-btn" data-filter="engagement">Engagement</button>
-          <button class="filter-btn" data-filter="travel">Adventures</button>
-          <button class="filter-btn" data-filter="wedding">Wedding</button>
-          <button class="filter-btn" data-filter="casual">Everyday Love</button>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <button id="lightbox-close" class="lightbox-close">✕</button>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
         </div>
-        
-        <div class="gallery-grid">
-          <div class="gallery-item" data-category="engagement">
-            <div class="gallery-image">
-              <img src="https://images.pexels.com/photos/1143754/pexels-photo-1143754.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Engagement photo 1" />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h4>Engagement Bliss</h4>
-                  <p>The moment we said yes to forever</p>
-                  <div class="view-btn">View</div>
-                </div>
-              </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title floral-decoration">What Others Say</h2>
+                <p class="section-description">Love that touches hearts and inspires others</p>
             </div>
-          </div>
-          
-          <div class="gallery-item" data-category="travel">
-            <div class="gallery-image">
-              <img src="https://images.pexels.com/photos/1024998/pexels-photo-1024998.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Travel photo 1" />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h4>Paris Adventure</h4>
-                  <p>Love in the city of lights</p>
-                  <div class="view-btn">View</div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">❝</div>
+                    <div class="testimonial-stars">
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                    </div>
+                    <p class="testimonial-text">"Emma and James are the perfect example of true love. Watching them together makes you believe in fairy tales again."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bc?q=80&w=150&h=150&fit=crop&crop=face" alt="Sarah Mitchell">
+                        <div class="author-info">
+                            <p class="author-name">Sarah Mitchell</p>
+                            <p class="author-relation">Best Friend</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="gallery-item" data-category="casual">
-            <div class="gallery-image">
-              <img src="https://images.pexels.com/photos/1024970/pexels-photo-1024970.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Casual photo 1" />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h4>Weekend Getaway</h4>
-                  <p>Simple moments, infinite joy</p>
-                  <div class="view-btn">View</div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">❝</div>
+                    <div class="testimonial-stars">
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                    </div>
+                    <p class="testimonial-text">"Their love story gives me hope. The way they look at each other is pure magic."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&fit=crop&crop=face" alt="Michael Chen">
+                        <div class="author-info">
+                            <p class="author-name">Michael Chen</p>
+                            <p class="author-relation">College Friend</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="gallery-item" data-category="wedding">
-            <div class="gallery-image">
-              <img src="https://images.pexels.com/photos/1488317/pexels-photo-1488317.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Wedding photo 1" />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h4>Wedding Day Magic</h4>
-                  <p>The beginning of forever</p>
-                  <div class="view-btn">View</div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">❝</div>
+                    <div class="testimonial-stars">
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                    </div>
+                    <p class="testimonial-text">"From the moment I met them as a couple, I knew they were meant to be. Their love is inspiring and beautiful."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&h=150&fit=crop&crop=face" alt="Lisa Rodriguez">
+                        <div class="author-info">
+                            <p class="author-name">Lisa Rodriguez</p>
+                            <p class="author-relation">Colleague</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          
-          <div class="gallery-item" data-category="engagement">
-            <div class="gallery-image">
-              <img src="https://images.pexels.com/photos/1024974/pexels-photo-1024974.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Engagement photo 2" />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h4>The Proposal</h4>
-                  <p>Where dreams became reality</p>
-                  <div class="view-btn">View</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="gallery-item" data-category="casual">
-            <div class="gallery-image">
-              <img src="https://images.pexels.com/photos/1024975/pexels-photo-1024975.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Casual photo 2" />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h4>Morning Coffee</h4>
-                  <p>Love in everyday moments</p>
-                  <div class="view-btn">View</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Guestbook Section -->
     <section id="guestbook" class="guestbook-section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">Share the Love</div>
-          <h2 class="section-title">Leave Us Your Wishes</h2>
-          <div class="section-divider">
-            <div class="divider-line"></div>
-            <div class="divider-heart">♡</div>
-            <div class="divider-line"></div>
-          </div>
-          <p class="section-description">Your words of love and encouragement mean the world to us. Share your favorite memory or send us your heartfelt wishes.</p>
-        </div>
-        
-        <div class="guestbook-content">
-          <div class="guestbook-form-container">
-            <form class="guestbook-form" id="guestbookForm">
-              <div class="form-header">
-                <h3>Send Love & Wishes</h3>
-                <p>Your message will be treasured forever</p>
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="guestName">Your Name</label>
-                  <input type="text" id="guestName" placeholder="Enter your beautiful name" required>
-                  <div class="input-focus"></div>
-                </div>
-                <div class="form-group">
-                  <label for="guestEmail">Email (Optional)</label>
-                  <input type="email" id="guestEmail" placeholder="your@email.com">
-                  <div class="input-focus"></div>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label for="guestMessage">Your Message</label>
-                <textarea id="guestMessage" placeholder="Share your love, wishes, or favorite memory with Sarah & Michael..." required></textarea>
-                <div class="input-focus"></div>
-              </div>
-              
-              <button type="submit" class="submit-btn">
-                <span class="btn-text">Send Love</span>
-                <span class="btn-icon">♡</span>
-                <div class="btn-ripple"></div>
-              </button>
-            </form>
-          </div>
-          
-          <div class="messages-container">
-            <div class="messages-header">
-              <h3>Messages from Loved Ones</h3>
-              <div class="messages-count" id="messagesCount">2 beautiful messages</div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title floral-decoration">Guestbook</h2>
+                <p class="section-description">Leave us a message and be part of our love story</p>
             </div>
-            
-            <div class="messages-list" id="messagesList">
-              <div class="message-card">
-                <div class="message-avatar">E&J</div>
-                <div class="message-content">
-                  <div class="message-header">
-                    <strong>Emma & James</strong>
-                    <span class="message-date">2 days ago</span>
-                  </div>
-                  <p>"Congratulations to the most beautiful couple! Your love story gives us all hope and inspiration. Wishing you a lifetime of happiness together! ♡"</p>
-                  <div class="message-reactions">
-                    <button class="reaction-btn">♡ 12</button>
-                    <button class="reaction-btn">🥰 8</button>
-                  </div>
+
+            <div class="guestbook-content">
+                <!-- Message Form -->
+                <div class="guestbook-form-container">
+                    <h3 class="form-title">Share Your Wishes</h3>
+                    <form id="guestbook-form" class="guestbook-form">
+                        <div class="form-group">
+                            <input type="text" id="guest-name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="guest-message" placeholder="Write your message for Emma & James..." rows="4" required></textarea>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="btn-icon">❤</span>
+                                Add Message
+                            </button>
+                        </div>
+                    </form>
                 </div>
-              </div>
-              
-              <div class="message-card">
-                <div class="message-avatar">M&D</div>
-                <div class="message-content">
-                  <div class="message-header">
-                    <strong>Mom & Dad</strong>
-                    <span class="message-date">1 week ago</span>
-                  </div>
-                  <p>"We're so proud of the love you've built together. Welcome to the family, Michael! Sarah, you've found your perfect match. ♡"</p>
-                  <div class="message-reactions">
-                    <button class="reaction-btn">♡ 25</button>
-                    <button class="reaction-btn">🥰 15</button>
-                    <button class="reaction-btn">👏 10</button>
-                  </div>
+
+                <!-- Messages Display -->
+                <div id="guestbook-entries" class="guestbook-entries">
+                    <div class="guestbook-entry">
+                        <div class="entry-header">
+                            <h4 class="entry-name">Sarah & Mike</h4>
+                            <span class="entry-date">June 8, 2024</span>
+                        </div>
+                        <p class="entry-message">Congratulations on your beautiful love story! Wishing you both a lifetime of happiness and endless adventures together. ❤️</p>
+                    </div>
+
+                    <div class="guestbook-entry">
+                        <div class="entry-header">
+                            <h4 class="entry-name">The Johnson Family</h4>
+                            <span class="entry-date">June 7, 2024</span>
+                        </div>
+                        <p class="entry-message">What a wonderful couple you make! Your love shines so brightly and inspires us all. Here's to many more years of joy and laughter!</p>
+                    </div>
+
+                    <div class="guestbook-entry">
+                        <div class="entry-header">
+                            <h4 class="entry-name">Emma's College Roommate</h4>
+                            <span class="entry-date">June 6, 2024</span>
+                        </div>
+                        <p class="entry-message">I've watched Emma grow and change over the years, but I've never seen her as happy as she is with James. You two are perfect together!</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-background">
-        <div class="footer-hearts">
-          <div class="footer-heart">♡</div>
-          <div class="footer-heart">♡</div>
-          <div class="footer-heart">♡</div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">Emma & James</div>
+                <p class="footer-description">Thank you for being part of our love story and sharing in our joy.</p>
+            </div>
+
+            <div class="footer-divider">
+                <div class="divider-line"></div>
+                <span class="divider-heart">HR</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>With love and gratitude</p>
+                <p>© 2024 Emma & James. Made with HARSH RAJ</p>
+            </div>
         </div>
-      </div>
-      
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-logo">
-            <div class="logo-heart">♡</div>
-            <div class="logo-text">Sarah & Michael</div>
-          </div>
-          
-          <div class="footer-message">
-            <p>Thank you for being part of our love story</p>
-            <div class="footer-date">Forever & Always • Est. 2020</div>
-          </div>
-          
-          <div class="footer-social">
-            <div class="social-heart">Made with ♡</div>
-          </div>
-        </div>
-        
-        <div class="footer-bottom">
-          <p>&copy; 2024 Sarah & Michael. All love reserved.</p>
-        </div>
-      </div>
     </footer>
 
-    <!-- Enhanced Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-      <div class="lightbox-background"></div>
-      <div class="lightbox-content">
-        <button class="lightbox-close">&times;</button>
-        <div class="lightbox-image-container">
-          <img id="lightbox-image" src="" alt="">
-          <div class="lightbox-navigation">
-            <button class="nav-btn prev-btn">‹</button>
-            <button class="nav-btn next-btn">›</button>
-          </div>
-        </div>
-        <div class="lightbox-info">
-          <h4 id="lightbox-title"></h4>
-          <p id="lightbox-description"></p>
-        </div>
-      </div>
-    </div>
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
 
-    <script type="module" src="script.js"></script>
-  </body>
+    <script src="script.js" defer></script>
+</body>
 </html>

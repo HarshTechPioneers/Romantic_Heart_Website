@@ -1,641 +1,565 @@
-// Enhanced Navigation functionality
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
-
-// Toggle mobile menu
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-  });
-});
-
-// Smooth scrolling for navigation links
-navLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href');
-    const targetSection = document.querySelector(targetId);
-    
-    if (targetSection) {
-      const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-
-// Enhanced navbar background change on scroll
-window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.navbar');
-  if (window.scrollY > 50) {
-    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-    navbar.style.boxShadow = '0 4px 30px rgba(244, 194, 194, 0.3)';
-    navbar.style.backdropFilter = 'blur(20px)';
-  } else {
-    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-    navbar.style.boxShadow = 'none';
-    navbar.style.backdropFilter = 'blur(10px)';
-  }
-});
-
-// Create magical particles
-function createParticles() {
-  const particlesContainer = document.getElementById('particles');
-  
-  for (let i = 0; i < 50; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = Math.random() * 100 + 'vw';
-    particle.style.animationDelay = Math.random() * 15 + 's';
-    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-    particlesContainer.appendChild(particle);
-  }
-}
-
-// Initialize particles
-createParticles();
-
-// Animated counter for hero stats
-function animateCounter(element, target, duration = 2000) {
-  const start = 0;
-  const increment = target / (duration / 16);
-  let current = start;
-  
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      current = target;
-      clearInterval(timer);
-    }
-    element.textContent = Math.floor(current).toLocaleString();
-  }, 16);
-}
-
-// Initialize counters when hero section is visible
-const heroObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const counters = document.querySelectorAll('.stat-number[data-target]');
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        animateCounter(counter, target);
-      });
-      heroObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
-  heroObserver.observe(heroSection);
-}
-
-// Enhanced timeline animation on scroll
-const observerOptions = {
-  threshold: 0.2,
-  rootMargin: '0px 0px -100px 0px'
+// Application State
+const AppState = {
+    currentQuoteIndex: 0,
+    mobileMenuOpen: false,
+    currentFilter: 'all',
+    guestbookEntries: [
+        {
+            id: 1,
+            name: 'Sarah & Mike',
+            message: 'Congratulations on your beautiful love story! Wishing you both a lifetime of happiness and endless adventures together. ❤️',
+            date: 'June 8, 2024'
+        },
+        {
+            id: 2,
+            name: 'The Johnson Family',
+            message: 'What a wonderful couple you make! Your love shines so brightly and inspires us all. Here\'s to many more years of joy and laughter!',
+            date: 'June 7, 2024'
+        },
+        {
+            id: 3,
+            name: 'Emma\'s College Roommate',
+            message: 'I\'ve watched Emma grow and change over the years, but I\'ve never seen her as happy as she is with James. You two are perfect together!',
+            date: 'June 6, 2024'
+        }
+    ]
 };
 
-const timelineObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry, index) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.style.opacity = '1';
-        entry.target.style.animation = entry.target.classList.contains('timeline-item') && 
-          Array.from(entry.target.parentElement.children).indexOf(entry.target) % 2 === 0 
-          ? 'slideInFromLeft 0.8s ease forwards' 
-          : 'slideInFromRight 0.8s ease forwards';
-      }, index * 300);
-    }
-  });
-}, observerOptions);
+// Love quotes for hero section
+const loveQuotes = [
+    "Every love story is beautiful, but ours is my favorite",
+    "Together is a wonderful place to be",
+    "You are my today and all of my tomorrows",
+    "In all the world, there is no heart for me like yours"
+];
 
-// Observe timeline items
-document.querySelectorAll('.timeline-item').forEach(item => {
-  timelineObserver.observe(item);
-});
-
-// Enhanced gallery functionality
-const galleryItems = document.querySelectorAll('.gallery-item');
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightbox-image');
-const lightboxTitle = document.getElementById('lightbox-title');
-const lightboxDescription = document.getElementById('lightbox-description');
-const lightboxClose = document.querySelector('.lightbox-close');
-
-let currentImageIndex = 0;
-let galleryImages = [];
-
-// Collect all gallery images
-galleryItems.forEach((item, index) => {
-  const img = item.querySelector('img');
-  const title = item.querySelector('.overlay-content h4').textContent;
-  const description = item.querySelector('.overlay-content p').textContent;
-  
-  galleryImages.push({
-    src: img.src,
-    title: title,
-    description: description
-  });
-  
-  item.addEventListener('click', () => {
-    currentImageIndex = index;
-    openLightbox();
-  });
-});
-
-function openLightbox() {
-  const image = galleryImages[currentImageIndex];
-  lightboxImage.src = image.src;
-  lightboxTitle.textContent = image.title;
-  lightboxDescription.textContent = image.description;
-  lightbox.style.display = 'block';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-  lightbox.style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
-
-// Navigation buttons
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-
-prevBtn.addEventListener('click', () => {
-  currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-  openLightbox();
-});
-
-nextBtn.addEventListener('click', () => {
-  currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-  openLightbox();
-});
-
-// Close lightbox
-lightboxClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox || e.target.classList.contains('lightbox-background')) {
-    closeLightbox();
-  }
-});
-
-// Close lightbox with Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && lightbox.style.display === 'block') {
-    closeLightbox();
-  }
-  if (lightbox.style.display === 'block') {
-    if (e.key === 'ArrowLeft') {
-      prevBtn.click();
-    } else if (e.key === 'ArrowRight') {
-      nextBtn.click();
-    }
-  }
-});
-
-// Gallery filter functionality
-const filterBtns = document.querySelectorAll('.filter-btn');
-const galleryGrid = document.querySelector('.gallery-grid');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Remove active class from all buttons
-    filterBtns.forEach(b => b.classList.remove('active'));
-    // Add active class to clicked button
-    btn.classList.add('active');
-    
-    const filter = btn.getAttribute('data-filter');
-    
-    galleryItems.forEach(item => {
-      if (filter === 'all' || item.getAttribute('data-category') === filter) {
-        item.style.display = 'block';
-        item.style.animation = 'fadeInUp 0.6s ease';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  });
-});
-
-// Enhanced guestbook functionality
-const guestbookForm = document.getElementById('guestbookForm');
-const messagesList = document.getElementById('messagesList');
-const messagesCount = document.getElementById('messagesCount');
-
-// Load messages from localStorage
-let messages = JSON.parse(localStorage.getItem('guestbookMessages')) || [];
-
-// Display existing messages
-function displayMessages() {
-  messagesList.innerHTML = '';
-  
-  // Add default messages if none exist
-  if (messages.length === 0) {
-    messages = [
-      {
-        name: "Emma & James",
-        email: "",
-        message: "Congratulations to the most beautiful couple! Your love story gives us all hope and inspiration. Wishing you a lifetime of happiness together! ♡",
-        date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toLocaleDateString(),
-        reactions: { heart: 12, smile: 8, clap: 0 }
-      },
-      {
-        name: "Mom & Dad",
-        email: "",
-        message: "We're so proud of the love you've built together. Welcome to the family, Michael! Sarah, you've found your perfect match. ♡",
-        date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toLocaleDateString(),
-        reactions: { heart: 25, smile: 15, clap: 10 }
-      }
-    ];
-  }
-  
-  // Update messages count
-  messagesCount.textContent = `${messages.length} beautiful message${messages.length !== 1 ? 's' : ''}`;
-  
-  messages.forEach((message, index) => {
-    const messageCard = document.createElement('div');
-    messageCard.className = 'message-card';
-    
-    // Create avatar from initials
-    const initials = message.name.split(' ').map(word => word[0]).join('').toUpperCase();
-    
-    messageCard.innerHTML = `
-      <div class="message-avatar">${initials}</div>
-      <div class="message-content">
-        <div class="message-header">
-          <strong>${message.name}</strong>
-          <span class="message-date">${getRelativeTime(message.date)}</span>
-        </div>
-        <p>"${message.message}"</p>
-        <div class="message-reactions">
-          <button class="reaction-btn" data-reaction="heart" data-index="${index}">♡ ${message.reactions?.heart || 0}</button>
-          <button class="reaction-btn" data-reaction="smile" data-index="${index}">🥰 ${message.reactions?.smile || 0}</button>
-          <button class="reaction-btn" data-reaction="clap" data-index="${index}">👏 ${message.reactions?.clap || 0}</button>
-        </div>
-      </div>
-    `;
-    messagesList.appendChild(messageCard);
-  });
-  
-  // Add reaction event listeners
-  document.querySelectorAll('.reaction-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const reaction = e.target.getAttribute('data-reaction');
-      const index = parseInt(e.target.getAttribute('data-index'));
-      
-      if (!messages[index].reactions) {
-        messages[index].reactions = { heart: 0, smile: 0, clap: 0 };
-      }
-      
-      messages[index].reactions[reaction]++;
-      localStorage.setItem('guestbookMessages', JSON.stringify(messages));
-      
-      // Update button text
-      e.target.textContent = `${reaction === 'heart' ? '♡' : reaction === 'smile' ? '🥰' : '👏'} ${messages[index].reactions[reaction]}`;
-      
-      // Add animation
-      e.target.style.transform = 'scale(1.2)';
-      setTimeout(() => {
-        e.target.style.transform = 'scale(1)';
-      }, 200);
-    });
-  });
-}
-
-// Get relative time (e.g., "2 days ago")
-function getRelativeTime(dateString) {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffTime = Math.abs(now - date);
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  
-  if (diffDays === 0) {
-    return 'Today';
-  } else if (diffDays === 1) {
-    return '1 day ago';
-  } else if (diffDays < 7) {
-    return `${diffDays} days ago`;
-  } else if (diffDays < 30) {
-    const weeks = Math.floor(diffDays / 7);
-    return weeks === 1 ? '1 week ago' : `${weeks} weeks ago`;
-  } else {
-    const months = Math.floor(diffDays / 30);
-    return months === 1 ? '1 month ago' : `${months} months ago`;
-  }
-}
-
-// Handle form submission
-guestbookForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  
-  const name = document.getElementById('guestName').value.trim();
-  const email = document.getElementById('guestEmail').value.trim();
-  const message = document.getElementById('guestMessage').value.trim();
-  
-  if (name && message) {
-    const newMessage = {
-      name: name,
-      email: email,
-      message: message,
-      date: new Date().toLocaleDateString(),
-      reactions: { heart: 0, smile: 0, clap: 0 }
+// Utility Functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
     };
-    
-    messages.unshift(newMessage); // Add to beginning of array
-    localStorage.setItem('guestbookMessages', JSON.stringify(messages));
-    
-    // Clear form
-    guestbookForm.reset();
-    
-    // Show success message
-    showSuccessMessage();
-    
-    // Update display
-    displayMessages();
-  }
-});
-
-// Show success message with enhanced animation
-function showSuccessMessage() {
-  const submitBtn = document.querySelector('.submit-btn');
-  const originalText = submitBtn.querySelector('.btn-text').textContent;
-  const btnText = submitBtn.querySelector('.btn-text');
-  const btnIcon = submitBtn.querySelector('.btn-icon');
-  
-  btnText.textContent = 'Message Sent!';
-  btnIcon.textContent = '✓';
-  submitBtn.style.background = 'linear-gradient(45deg, #10b981, #34d399)';
-  
-  // Trigger ripple effect
-  const ripple = submitBtn.querySelector('.btn-ripple');
-  ripple.style.width = '300px';
-  ripple.style.height = '300px';
-  
-  setTimeout(() => {
-    btnText.textContent = originalText;
-    btnIcon.textContent = '♡';
-    submitBtn.style.background = 'var(--gradient-rose)';
-    ripple.style.width = '0';
-    ripple.style.height = '0';
-  }, 3000);
 }
 
-// Initialize messages display
-displayMessages();
-
-// Enhanced parallax effect for hero section
-window.addEventListener('scroll', () => {
-  const scrolled = window.pageYOffset;
-  const heroImage = document.querySelector('.hero-image img');
-  const floatingHearts = document.querySelectorAll('.floating-heart');
-  
-  if (heroImage) {
-    heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
-  }
-  
-  // Parallax for floating hearts
-  floatingHearts.forEach((heart, index) => {
-    const speed = 0.2 + (index * 0.1);
-    heart.style.transform = `translateY(${scrolled * speed}px)`;
-  });
-});
-
-// Add enhanced scroll reveal animation for sections
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-});
-
-// Observe all major sections and cards
-document.querySelectorAll('.story-section, .gallery-section, .guestbook-section, .story-card').forEach(section => {
-  section.style.opacity = '0';
-  section.style.transform = 'translateY(50px)';
-  section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-  revealObserver.observe(section);
-});
-
-// Enhanced typing effect for hero subtitle
-function typeWriter(element, text, speed = 100) {
-  let i = 0;
-  element.textContent = '';
-  
-  function type() {
-    if (i < text.length) {
-      element.textContent += text.charAt(i);
-      i++;
-      setTimeout(type, speed);
-    }
-  }
-  
-  type();
+function formatDate(date) {
+    return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    });
 }
 
-// Initialize typing effect when page loads
-window.addEventListener('load', () => {
-  const heroSubtitle = document.querySelector('.hero-subtitle');
-  if (heroSubtitle) {
-    const originalText = heroSubtitle.textContent;
-    
-    setTimeout(() => {
-      typeWriter(heroSubtitle, originalText, 60);
-    }, 2500);
-  }
-});
+// Toast System
+class ToastManager {
+    constructor() {
+        this.container = document.getElementById('toast-container');
+        this.toasts = [];
+    }
 
-// Enhanced floating hearts animation
-function createFloatingHeart() {
-  const heart = document.createElement('div');
-  heart.innerHTML = '♡';
-  heart.style.position = 'fixed';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.top = '100vh';
-  heart.style.fontSize = Math.random() * 30 + 20 + 'px';
-  heart.style.color = `hsl(${Math.random() * 60 + 320}, 70%, 80%)`;
-  heart.style.pointerEvents = 'none';
-  heart.style.zIndex = '1';
-  heart.style.opacity = Math.random() * 0.7 + 0.3;
-  heart.style.animation = `floatUp ${Math.random() * 8 + 12}s linear forwards`;
-  
-  document.body.appendChild(heart);
-  
-  setTimeout(() => {
-    heart.remove();
-  }, 20000);
+    show(message, type = 'success', duration = 3000) {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        
+        this.container.appendChild(toast);
+        
+        // Trigger animation
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 10);
+        
+        // Auto remove
+        setTimeout(() => {
+            this.remove(toast);
+        }, duration);
+        
+        return toast;
+    }
+    
+    remove(toast) {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 300);
+    }
 }
 
-// Add floating hearts animation keyframes
-const floatUpKeyframes = `
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
+const toast = new ToastManager();
+
+// Navigation functionality
+class Navigation {
+    constructor() {
+        this.nav = document.getElementById('navigation');
+        this.progressBar = this.nav.querySelector('.nav-progress');
+        this.mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        this.mobileMenu = document.getElementById('mobile-menu');
+        this.navItems = document.querySelectorAll('.nav-item');
+        
+        this.init();
     }
-    100% {
-      transform: translateY(-100vh) rotate(360deg);
-      opacity: 0;
-    }
-  }
-`;
-
-const style = document.createElement('style');
-style.textContent = floatUpKeyframes;
-document.head.appendChild(style);
-
-// Create floating hearts periodically
-setInterval(createFloatingHeart, 4000);
-
-// Enhanced click effects for interactive elements
-document.querySelectorAll('.gallery-item, .story-card, .message-card').forEach(item => {
-  item.addEventListener('click', (e) => {
-    // Create ripple effect
-    const ripple = document.createElement('div');
-    ripple.style.position = 'absolute';
-    ripple.style.borderRadius = '50%';
-    ripple.style.background = 'rgba(244, 194, 194, 0.6)';
-    ripple.style.transform = 'scale(0)';
-    ripple.style.animation = 'ripple 0.8s linear';
-    ripple.style.left = (e.clientX - item.getBoundingClientRect().left - 25) + 'px';
-    ripple.style.top = (e.clientY - item.getBoundingClientRect().top - 25) + 'px';
-    ripple.style.width = ripple.style.height = '50px';
-    ripple.style.pointerEvents = 'none';
     
-    item.style.position = 'relative';
-    item.appendChild(ripple);
+    init() {
+        // Scroll progress
+        window.addEventListener('scroll', debounce(() => {
+            this.updateScrollProgress();
+        }, 10));
+        
+        // Mobile menu toggle
+        this.mobileMenuBtn.addEventListener('click', () => {
+            this.toggleMobileMenu();
+        });
+        
+        // Navigation items
+        this.navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const href = e.target.getAttribute('data-href');
+                if (href) {
+                    this.scrollToSection(href);
+                    this.closeMobileMenu();
+                }
+            });
+        });
+    }
     
-    setTimeout(() => {
-      ripple.remove();
-    }, 800);
-  });
-});
-
-// Add ripple animation
-const rippleKeyframes = `
-  @keyframes ripple {
-    to {
-      transform: scale(6);
-      opacity: 0;
+    updateScrollProgress() {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.scrollY / totalHeight) * 100;
+        this.progressBar.style.width = `${Math.min(progress, 100)}%`;
     }
-  }
-`;
-
-style.textContent += rippleKeyframes;
-
-// Enhanced form interactions
-const formInputs = document.querySelectorAll('.form-group input, .form-group textarea');
-
-formInputs.forEach(input => {
-  input.addEventListener('focus', (e) => {
-    const formGroup = e.target.closest('.form-group');
-    const label = formGroup.querySelector('label');
-    if (label) {
-      label.style.color = 'var(--deep-pink)';
-      label.style.transform = 'translateY(-5px)';
+    
+    toggleMobileMenu() {
+        AppState.mobileMenuOpen = !AppState.mobileMenuOpen;
+        this.mobileMenu.classList.toggle('active', AppState.mobileMenuOpen);
+        
+        const menuIcon = this.mobileMenuBtn.querySelector('.menu-icon');
+        const closeIcon = this.mobileMenuBtn.querySelector('.close-icon');
+        
+        if (AppState.mobileMenuOpen) {
+            menuIcon.style.display = 'none';
+            closeIcon.style.display = 'block';
+        } else {
+            menuIcon.style.display = 'block';
+            closeIcon.style.display = 'none';
+        }
     }
-  });
-  
-  input.addEventListener('blur', (e) => {
-    const formGroup = e.target.closest('.form-group');
-    const label = formGroup.querySelector('label');
-    if (label) {
-      label.style.color = 'var(--text-dark)';
-      label.style.transform = 'translateY(0)';
+    
+    closeMobileMenu() {
+        AppState.mobileMenuOpen = false;
+        this.mobileMenu.classList.remove('active');
+        
+        const menuIcon = this.mobileMenuBtn.querySelector('.menu-icon');
+        const closeIcon = this.mobileMenuBtn.querySelector('.close-icon');
+        menuIcon.style.display = 'block';
+        closeIcon.style.display = 'none';
     }
-  });
-});
+    
+    scrollToSection(href) {
+        const element = document.querySelector(href);
+        if (element) {
+            const navHeight = this.nav.offsetHeight;
+            const elementPosition = element.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+    }
+}
 
-// Add smooth page transitions
+// Hero Section functionality
+class HeroSection {
+    constructor() {
+        this.quoteElement = document.getElementById('rotating-quote');
+        this.heroButtons = document.querySelectorAll('.hero-buttons .btn');
+        this.floatingHeartsContainer = document.querySelector('.floating-hearts');
+        
+        this.init();
+    }
+    
+    init() {
+        this.startQuoteRotation();
+        this.addFloatingHearts();
+        
+        // Hero button navigation
+        this.heroButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const href = e.currentTarget.getAttribute('data-href');
+                if (href) {
+                    this.scrollToSection(href);
+                }
+            });
+        });
+    }
+    
+    startQuoteRotation() {
+        setInterval(() => {
+            AppState.currentQuoteIndex = (AppState.currentQuoteIndex + 1) % loveQuotes.length;
+            this.quoteElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                this.quoteElement.textContent = loveQuotes[AppState.currentQuoteIndex];
+                this.quoteElement.style.opacity = '1';
+            }, 250);
+        }, 4000);
+    }
+    
+    addFloatingHearts() {
+        // Add more floating hearts dynamically
+        for (let i = 0; i < 10; i++) {
+            const heart = document.createElement('div');
+            heart.textContent = '❤';
+            heart.style.position = 'absolute';
+            heart.style.color = 'var(--romantic-pink-dark)';
+            heart.style.opacity = '0.2';
+            heart.style.fontSize = `${16 + Math.random() * 16}px`;
+            heart.style.top = `${10 + Math.random() * 80}%`;
+            heart.style.left = `${5 + Math.random() * 90}%`;
+            heart.style.animation = `float ${3 + Math.random() * 2}s ease-in-out infinite`;
+            heart.style.animationDelay = `${Math.random() * 3}s`;
+            heart.style.pointerEvents = 'none';
+            
+            this.floatingHeartsContainer.appendChild(heart);
+        }
+    }
+    
+    scrollToSection(href) {
+        const element = document.querySelector(href);
+        if (element) {
+            const navHeight = document.getElementById('navigation').offsetHeight;
+            const elementPosition = element.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+    }
+}
+
+// Statistics Counter Animation
+class StatisticsCounter {
+    constructor() {
+        this.statCards = document.querySelectorAll('.stat-count');
+        this.hasAnimated = false;
+        
+        this.init();
+    }
+    
+    init() {
+        // Intersection Observer for triggering animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !this.hasAnimated) {
+                    this.animateCounters();
+                    this.hasAnimated = true;
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statisticsSection = document.getElementById('statistics');
+        if (statisticsSection) {
+            observer.observe(statisticsSection);
+        }
+    }
+    
+    animateCounters() {
+        const duration = 2000; // 2 seconds
+        const steps = 60;
+        const stepDuration = duration / steps;
+        
+        this.statCards.forEach(card => {
+            const target = parseInt(card.getAttribute('data-target'));
+            let current = 0;
+            let step = 0;
+            
+            const timer = setInterval(() => {
+                step++;
+                const progress = step / steps;
+                current = Math.floor(target * progress);
+                
+                card.textContent = current.toLocaleString();
+                
+                if (step >= steps) {
+                    clearInterval(timer);
+                    card.textContent = target.toLocaleString();
+                }
+            }, stepDuration);
+        });
+    }
+}
+
+// Gallery functionality
+class Gallery {
+    constructor() {
+        this.filterBtns = document.querySelectorAll('.filter-btn');
+        this.galleryItems = document.querySelectorAll('.gallery-item');
+        this.lightbox = document.getElementById('lightbox');
+        this.lightboxImage = document.getElementById('lightbox-image');
+        this.lightboxClose = document.getElementById('lightbox-close');
+        
+        this.init();
+    }
+    
+    init() {
+        // Filter buttons
+        this.filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const filter = e.currentTarget.getAttribute('data-filter');
+                this.setActiveFilter(filter);
+                this.filterGallery(filter);
+            });
+        });
+        
+        // Gallery items click (lightbox)
+        this.galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                this.openLightbox(img.src, img.alt);
+            });
+        });
+        
+        // Lightbox close
+        this.lightboxClose.addEventListener('click', () => {
+            this.closeLightbox();
+        });
+        
+        this.lightbox.addEventListener('click', (e) => {
+            if (e.target === this.lightbox) {
+                this.closeLightbox();
+            }
+        });
+        
+        // Escape key to close lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.lightbox.classList.contains('active')) {
+                this.closeLightbox();
+            }
+        });
+    }
+    
+    setActiveFilter(filter) {
+        AppState.currentFilter = filter;
+        
+        this.filterBtns.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        const activeBtn = document.querySelector(`[data-filter="${filter}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
+    }
+    
+    filterGallery(filter) {
+        this.galleryItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            
+            if (filter === 'all' || category === filter) {
+                item.classList.remove('hidden');
+                item.style.display = 'block';
+            } else {
+                item.classList.add('hidden');
+                item.style.display = 'none';
+            }
+        });
+    }
+    
+    openLightbox(src, alt) {
+        this.lightboxImage.src = src;
+        this.lightboxImage.alt = alt;
+        this.lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    closeLightbox() {
+        this.lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Guestbook functionality
+class Guestbook {
+    constructor() {
+        this.form = document.getElementById('guestbook-form');
+        this.nameInput = document.getElementById('guest-name');
+        this.messageInput = document.getElementById('guest-message');
+        this.entriesContainer = document.getElementById('guestbook-entries');
+        
+        this.init();
+    }
+    
+    init() {
+        this.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleSubmit();
+        });
+        
+        this.renderEntries();
+    }
+    
+    handleSubmit() {
+        const name = this.nameInput.value.trim();
+        const message = this.messageInput.value.trim();
+        
+        if (!name || !message) {
+            toast.show('Please fill in both your name and message', 'error');
+            return;
+        }
+        
+        const newEntry = {
+            id: AppState.guestbookEntries.length + 1,
+            name: name,
+            message: message,
+            date: formatDate(new Date())
+        };
+        
+        AppState.guestbookEntries.unshift(newEntry);
+        this.renderEntries();
+        
+        // Clear form
+        this.nameInput.value = '';
+        this.messageInput.value = '';
+        
+        toast.show('Your message has been added to our guestbook! ❤️', 'success');
+    }
+    
+    renderEntries() {
+        this.entriesContainer.innerHTML = AppState.guestbookEntries.map(entry => `
+            <div class="guestbook-entry animate-fade-in">
+                <div class="entry-header">
+                    <h4 class="entry-name">${this.escapeHtml(entry.name)}</h4>
+                    <span class="entry-date">${entry.date}</span>
+                </div>
+                <p class="entry-message">${this.escapeHtml(entry.message)}</p>
+            </div>
+        `).join('');
+    }
+    
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+}
+
+// Intersection Observer for fade-in animations
+class AnimationObserver {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        // Observe sections for fade-in animation
+        const sections = document.querySelectorAll('section');
+        const cards = document.querySelectorAll('.story-card, .timeline-card, .stat-card, .testimonial-card');
+        
+        [...sections, ...cards].forEach(el => {
+            observer.observe(el);
+        });
+    }
+}
+
+// Smooth scrolling for all navigation
+function initSmoothScrolling() {
+    const buttons = document.querySelectorAll('[data-href]');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const href = e.currentTarget.getAttribute('data-href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                
+                const element = document.querySelector(href);
+                if (element) {
+                    const navHeight = document.getElementById('navigation').offsetHeight;
+                    const elementPosition = element.offsetTop - navHeight;
+                    
+                    window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
+
+// Initialize application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.5s ease';
-  
-  setTimeout(() => {
-    document.body.style.opacity = '1';
-  }, 100);
+    // Initialize all components
+    new Navigation();
+    new HeroSection();
+    new StatisticsCounter();
+    new Gallery();
+    new Guestbook();
+    new AnimationObserver();
+    
+    // Initialize smooth scrolling
+    initSmoothScrolling();
+    
+    // Add loading animation to images
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.addEventListener('load', () => {
+            img.style.opacity = '1';
+        });
+        
+        // Set initial opacity
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.3s ease';
+        
+        // If image is already loaded
+        if (img.complete) {
+            img.style.opacity = '1';
+        }
+    });
+    
+    // Add hover effects to cards
+    const cards = document.querySelectorAll('.story-card, .timeline-card, .stat-card, .testimonial-card, .guestbook-entry');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+    
+    console.log('Emma & James - Love Story Website Loaded Successfully! ❤️');
 });
 
-// Performance optimization: Lazy loading for images
-const imageObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const img = entry.target;
-      img.style.opacity = '0';
-      img.style.transition = 'opacity 0.5s ease';
-      
-      img.onload = () => {
-        img.style.opacity = '1';
-      };
-      
-      imageObserver.unobserve(img);
+// Handle window resize
+window.addEventListener('resize', debounce(() => {
+    // Close mobile menu on resize to desktop
+    if (window.innerWidth >= 768 && AppState.mobileMenuOpen) {
+        const nav = new Navigation();
+        nav.closeMobileMenu();
     }
-  });
-});
+}, 250));
 
-// Observe all images for lazy loading
-document.querySelectorAll('img').forEach(img => {
-  imageObserver.observe(img);
-});
-
-// Add custom cursor effect for interactive elements
-document.addEventListener('mousemove', (e) => {
-  const cursor = document.querySelector('.custom-cursor');
-  if (!cursor) {
-    const newCursor = document.createElement('div');
-    newCursor.className = 'custom-cursor';
-    newCursor.style.cssText = `
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, var(--primary-pink), transparent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.6;
-      transition: transform 0.1s ease;
-    `;
-    document.body.appendChild(newCursor);
-  }
-  
-  const customCursor = document.querySelector('.custom-cursor');
-  customCursor.style.left = e.clientX - 10 + 'px';
-  customCursor.style.top = e.clientY - 10 + 'px';
-});
-
-// Enhanced hover effects for interactive elements
-document.querySelectorAll('button, .nav-link, .gallery-item, .story-card').forEach(element => {
-  element.addEventListener('mouseenter', () => {
-    const cursor = document.querySelector('.custom-cursor');
-    if (cursor) {
-      cursor.style.transform = 'scale(2)';
-      cursor.style.background = 'radial-gradient(circle, var(--deep-pink), transparent)';
+// Prevent right-click on images (optional)
+document.addEventListener('contextmenu', (e) => {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
     }
-  });
-  
-  element.addEventListener('mouseleave', () => {
-    const cursor = document.querySelector('.custom-cursor');
-    if (cursor) {
-      cursor.style.transform = 'scale(1)';
-      cursor.style.background = 'radial-gradient(circle, var(--primary-pink), transparent)';
-    }
-  });
 });
-
-console.log('🌸 Enhanced Love Story Website Loaded Successfully! 💕✨');
-console.log('🎉 Features: Magical particles, animated counters, enhanced lightbox, interactive reactions, and much more!');
